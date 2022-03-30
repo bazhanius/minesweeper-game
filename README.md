@@ -41,4 +41,5 @@ cd minesweeper
 npm start
 ``` 
 That's all. You can play the game in your browser: `http://localhost:3000`
-Open any cell by clicking it, or flag it with a right-click. Click emoji to resert game.
+
+Open any cell by clicking it, or flag it with a right-click. Click emoji to reset game.
