@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Сапёр</title>
+    <link rel="stylesheet" type="text/css" href="minesweeper.css">
+    <script type="module" src="minesweeper.js"></script>
+</head>
+<body>
+<div class="app">
+    <div class="app-container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="bombs-count"></div>
+            <div class="reset-game">
+                <div class="minesweeper-btn" id="restart-btn">🙂</div>
+            </div>
+            <div id="timer">00:00</div>
+        </div>
+        <!-- /Header -->
+
+        <div class="board-wrap">
+            <div class="board"></div>
+            <div class="end-screen"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="toggle-settings">
+                <div class="minesweeper-btn" id="settings-btn">⚙️</div>
+            </div>
+            <div class="click-type">
+                <div class="segmented">
+                    <div class="segmented-item">⛏</div>
+                    <div class="segmented-item">🚩</div>
+                    <div class="segmented-item-selected"></div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+        <!-- /Footer -->
+
+        <!-- Settings -->
+        <div class="settings">
+            <div>
+                <label for="boardSize">
+                    <span data-lang="ru">Размер поля:</span>
+                    <span data-lang="en">Field size:</span>
+                </label>
+                <select name="boardSize" id="boardSize">
+                    <option value="4">4×4</option>
+                    <option value="5">5×5</option>
+                    <option value="6">6×6</option>
+                    <option value="7">7×7</option>
+                    <option value="8">8×8</option>
+                    <option value="9">9×9</option>
+                    <option value="10" selected>10×10</option>
+                    <option value="11">11×11</option>
+                    <option value="12">12×12</option>
+                    <option value="13">13×13</option>
+                    <option value="14">14×14</option>
+                    <option value="15">15×15</option>
+                    <option value="16">16×16</option>
+                    <option value="17">17×17</option>
+                    <option value="18">18×18</option>
+                    <option value="19">19×19</option>
+                    <option value="20">20×20</option>
+                </select>
+            </div>
+            <div>
+                <label for="difficulty">
+                    <span data-lang="ru">Сложность:</span>
+                    <span data-lang="en">Difficulty:</span>
+                </label>
+                <select name="difficulty" id="difficulty">
+                    <option value="0.1" selected>⭐</option>
+                    <option value="0.2">⭐⭐</option>
+                    <option value="0.4">⭐⭐⭐</option>
+                </select>
+            </div>
+        </div>
+        <!-- /Settings -->
+
+    </div>
+</div>
+
+
+</body>
+</html>

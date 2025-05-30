@@ -1,0 +1,281 @@
+:root {
+    --boardSize: 10;
+}
+
+body, html, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: sans-serif;
+    color: #424243;
+    user-select: none;
+    touch-action: manipulation;
+    pointer-events: auto;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f7;
+}
+
+.app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 12px;
+    transition: all 0.1s ease-in;
+}
+
+.app-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 12px;
+    overflow: visible;
+}
+
+.header, .footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 12px;
+    width: 100%;
+    overflow: visible;
+}
+
+.header > * {
+    pointer-events: none;
+}
+
+.end-screen {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    text-shadow: 2px 2px 3px #fff;
+    font-size: 32px;
+    font-weight: 700;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: red;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.end-screen.show {
+    display: flex;
+}
+
+.end-screen span {
+    color: green;
+}
+
+.board-wrap {
+    width: 100%;
+    position: relative;
+}
+
+.board {
+    background: #e2e2e2;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--boardSize), 1fr);
+    gap: 0;
+    /*margin: 10px auto;*/
+    /*border: 8px solid #337AB7;*/
+    box-sizing: border-box;
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);*/
+}
+
+.board .tile {
+    background: #e2e2e2;
+    width: 100%;
+    height: calc((100vw - 24px) / var(--boardSize));
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc((100vw - 24px) / var(--boardSize) * .7);
+    cursor: pointer;
+    user-select: none;
+    transition: background .2s ease;
+    font-family: Tahoma, sans-serif;
+    box-shadow: inset 0 2px 0 0 #fcfcfc, inset 2px 0 0 0 #fcfcfc, inset 0 -2px 0 0 #c9c9c9, inset -2px 0 0 0 #c9c9c9;
+}
+
+.board .tile:hover:not(.tile--checked) {
+    background: #efefef;
+}
+
+.board .tile--checked {
+    background: #d5d5d5;
+    box-shadow: inset 0 1px 0 0 #c9c9c9, inset 1px 0 0 0 #c9c9c9, inset 0 -1px 0 0 #c9c9c9, inset -1px 0 0 0 #c9c9c9;
+}
+
+.board .tile--checked.tile--bomb:before, .board .tile--checked.tile--bomb:after {
+    opacity: 1;
+}
+
+.board .tile--checked:hover {
+    cursor: default;
+}
+
+.reset-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.toggle-settings {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bombs-count {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#timer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.settings {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #e5e5e5;
+    box-shadow: 0 1px 3px #bbb inset, 1px 0 3px #fff;
+    border-radius: 6px;
+}
+
+.settings > div {
+    display: flex;
+    gap: 6px;
+}
+
+.click-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.segmented {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: fit-content;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    box-shadow: 0 1px 3px #bbb inset, 1px 0 3px #fff;
+}
+
+.segmented-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    margin: 4px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.segmented-item-selected {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: calc(50% - 4px);
+    height: calc(100% - 4px);
+    padding: 2px;
+    margin: 2px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    color: rgba(0, 0, 0, 0.88);
+    z-index: 1;
+    transition: left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: 1px solid #777;
+    box-sizing: border-box;
+}
+
+.minesweeper-btn {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border: 1px solid #777;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.minesweeper-btn:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid #555;
+}
+
+@media (orientation: landscape) {
+    .app-container {
+        width: 480px;
+    }
+
+    body, html {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .board .tile {
+        height: calc(480px / var(--boardSize));
+        font-size: calc(480px / var(--boardSize) * .7);
+    }
+}
+
+@media (orientation: portrait) {
+    .app-container {
+        width: 100%;
+    }
+
+    body, html {
+        overflow: hidden;
+    }
+
+    .board .tile {
+        height: calc((100vw - 24px) / var(--boardSize));
+        font-size: calc((100vw - 24px) / var(--boardSize) * .7);
+    }
+}
