@@ -4,19 +4,56 @@
 
 function ready() {
 
-    let userLang = navigator.language.indexOf('ru') !== -1 ? 'ru' : 'en';
+    let l10n = {
+        title: {
+            ru: 'Сапёр',
+            en: 'Minesweeper',
+            zh: '踩地雷'
+        },
+        win: {
+            ru: '<span>🎉 Победа!</span>',
+            en: '<span>🎉 Victory!</span>',
+            zh: '<span>🎉 胜利!</span>'
+        },
+        loose: {
+            ru: '💥 Бум! Поражение',
+            en: '💥 Boom! Game over',
+            zh: '💥 咚!游戏结束'
+        },
+        hiScore: {
+            ru: 'Рекорд',
+            en: 'High score',
+            zh: '高分'
+        }
+    }
+
+    let userLang = navigator.language.indexOf('ru') !== -1 ?
+        'ru'
+        : navigator.language.indexOf('zh') !== -1
+            ? 'zh'
+            : 'en';
 
     let ruLangItems = document.querySelectorAll('[data-lang="ru"]');
     let enLangItems = document.querySelectorAll('[data-lang="en"]');
+    let zhLangItems = document.querySelectorAll('[data-lang="zh"]');
+
     function updateTranslate() {
+        document.title = l10n.title[userLang];
         if (userLang === 'ru') {
             ruLangItems.forEach(x => x.style.display = 'block');
             enLangItems.forEach(x => x.style.display = 'none');
+            zhLangItems.forEach(x => x.style.display = 'none');
+        } else if (userLang === 'zh') {
+            ruLangItems.forEach(x => x.style.display = 'none');
+            enLangItems.forEach(x => x.style.display = 'none');
+            zhLangItems.forEach(x => x.style.display = 'block');
         } else {
             ruLangItems.forEach(x => x.style.display = 'none');
             enLangItems.forEach(x => x.style.display = 'block');
+            zhLangItems.forEach(x => x.style.display = 'none');
         }
     }
+
     updateTranslate();
 
     const playButtonText = {
@@ -46,17 +83,6 @@ function ready() {
     let bombs = [];
     let numbers = [];
     let numberColors = ['#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#f1c40f', '#1abc9c', '#34495e', '#7f8c8d',];
-
-    let l10n = {
-        win: {
-            ru:'<span>🎉 Победа!</span>',
-            en: '🎉 Victory!'
-        },
-        loose: {
-            ru: '💥 Бум! Поражение',
-            en: '💥 Boom! Game over'
-        }
-    }
 
     let gameOver = false;
 
